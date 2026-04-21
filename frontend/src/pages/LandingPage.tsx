@@ -26,7 +26,7 @@ export function LandingPage() {
   return (
     <AppShell>
       <section className="grid gap-6 md:grid-cols-2">
-        <div className="card bg-gradient-to-br from-brand.purple to-brand.lavender p-6 text-white">
+        <div className="card bg-gradient-to-br from-brand.purple to-brand.lavender p-6">
           <h2 className="mb-3 text-3xl font-bold">Descubre tu camino</h2>
           <p className="text-sm md:text-base">
             DecideTab te ayuda a identificar tus intereses vocacionales y sugerir carreras acordes a tu perfil.
@@ -64,7 +64,7 @@ export function LandingPage() {
 
           {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
-          <button className="mt-6 w-full rounded-2xl bg-brand.orange px-4 py-3 font-semibold text-white hover:brightness-95">
+          <button className="mt-6 w-full rounded-2xl bg-brand.orange px-4 py-3 font-semibold hover:brightness-95">
             Continuar
           </button>
         </form>

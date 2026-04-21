@@ -1,52 +1,62 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppShell } from '../components/AppShell';
-import { ProgressBar } from '../components/ProgressBar';
-import { useSession } from '../context/SessionContext';
-import { calculateResults, getTestItems } from '../services/api';
-import { HerefordItem } from '../types';
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppShell } from "../components/AppShell";
+import { ProgressBar } from "../components/ProgressBar";
+import { useSession } from "../context/SessionContext";
+import { calculateResults, getTestItems } from "../services/api";
+import { HerefordItem } from "../types";
 
 const SCALE = [1, 2, 3, 4, 5];
 const PAGE_SIZE = 10;
 
 export function TestPage() {
   const navigate = useNavigate();
-  const { profile, socioeconomicAnswers, testAnswers, setTestAnswers, setResults } = useSession();
+  const {
+    profile,
+    socioeconomicAnswers,
+    testAnswers,
+    setTestAnswers,
+    setResults,
+  } = useSession();
   const [items, setItems] = useState<HerefordItem[]>([]);
   const [answers, setAnswers] = useState<Record<string, number>>(testAnswers);
   const [page, setPage] = useState(0);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!profile) navigate('/');
-    if (!Object.keys(socioeconomicAnswers).length) navigate('/socioeconomico');
+    if (!profile) navigate("/");
+    if (!Object.keys(socioeconomicAnswers).length) navigate("/socioeconomico");
   }, [profile, socioeconomicAnswers, navigate]);
 
   useEffect(() => {
     getTestItems()
       .then(setItems)
-      .catch(() => setError('No se pudo cargar el test Hereford.'));
+      .catch(() => setError("No se pudo cargar el test Hereford."));
   }, []);
 
   const totalPages = Math.ceil(items.length / PAGE_SIZE);
   const currentItems = useMemo(
     () => items.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE),
-    [items, page]
+    [items, page],
   );
 
-  const completion = items.length ? (Object.keys(answers).length / items.length) * 100 : 0;
+  const completion = items.length
+    ? (Object.keys(answers).length / items.length) * 100
+    : 0;
 
   const validateCurrentPage = () =>
-    currentItems.every((item) => Number(answers[String(item.item_number)]) >= 1);
+    currentItems.every(
+      (item) => Number(answers[String(item.item_number)]) >= 1,
+    );
 
   const nextPage = async () => {
     if (!validateCurrentPage()) {
-      setError('Responde todos los ítems de la página actual.');
+      setError("Responde todos los ítems de la página actual.");
       return;
     }
 
-    setError('');
+    setError("");
     setTestAnswers(answers);
 
     if (page < totalPages - 1) {
@@ -61,12 +71,15 @@ export function TestPage() {
       const result = await calculateResults({
         sex: profile.sex,
         testAnswers: answers,
-        socioeconomicAnswers
+        socioeconomicAnswers,
       });
-      setResults({ dominantInterests: result.dominantInterests, careers: result.careers });
-      navigate('/resultados');
+      setResults({
+        dominantInterests: result.dominantInterests,
+        careers: result.careers,
+      });
+      navigate("/resultados");
     } catch {
-      setError('No se pudieron calcular los resultados. Intenta de nuevo.');
+      setError("No se pudieron calcular los resultados. Intenta de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -98,13 +111,13 @@ export function TestPage() {
                   onClick={() =>
                     setAnswers((prev) => ({
                       ...prev,
-                      [String(item.item_number)]: value
+                      [String(item.item_number)]: value,
                     }))
                   }
                   className={`rounded-xl border px-2 py-2 text-sm ${
                     answers[String(item.item_number)] === value
-                      ? 'border-brand.purple bg-brand.purple text-white'
-                      : 'border-slate-300 bg-white'
+                      ? "border-brand.purple bg-brand.purple"
+                      : "border-slate-300 bg-white"
                   }`}
                 >
                   {value}
@@ -125,15 +138,21 @@ export function TestPage() {
           Anterior
         </button>
 
-        <div className="text-center text-sm text-slate-600">1 = Me desagrada mucho · 5 = Me gusta mucho</div>
+        <div className="text-center text-sm text-slate-600">
+          1 = Me desagrada mucho · 5 = Me gusta mucho
+        </div>
 
         <button
           type="button"
           onClick={nextPage}
           disabled={loading}
-          className="rounded-2xl bg-brand.orange px-5 py-3 font-semibold text-white disabled:opacity-60"
+          className="rounded-2xl bg-brand.orange px-5 py-3 font-semibold disabled:opacity-60"
         >
-          {page === totalPages - 1 ? (loading ? 'Calculando...' : 'Ver resultados') : 'Siguiente'}
+          {page === totalPages - 1
+            ? loading
+              ? "Calculando..."
+              : "Ver resultados"
+            : "Siguiente"}
         </button>
       </div>
 

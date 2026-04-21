@@ -16,7 +16,7 @@ export function ResultsPage() {
 
   return (
     <AppShell>
-      <div className="card mb-5 bg-gradient-to-r from-brand.lavender to-brand.blue p-5 text-white">
+      <div className="card mb-5 bg-gradient-to-r from-brand.lavender to-brand.blue p-5">
         <h2 className="text-2xl font-bold">Resultados de {profile?.name}</h2>
         <p className="text-sm">Top 3 intereses dominantes según percentil Hereford.</p>
       </div>

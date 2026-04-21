@@ -70,7 +70,7 @@ export function SocioeconomicPage() {
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
       <div className="flex justify-end">
-        <button onClick={onContinue} className="rounded-2xl bg-brand.purple px-6 py-3 font-semibold text-white">
+        <button onClick={onContinue} className="rounded-2xl bg-brand.purple px-6 py-3 font-semibold">
           Ir al test Hereford
         </button>
       </div>
