@@ -116,7 +116,7 @@ export function TestPage() {
                   }
                   className={`rounded-xl border px-2 py-2 text-sm ${
                     answers[String(item.item_number)] === value
-                      ? "border-brand.purple bg-brand.purple"
+                      ? "border-brand.purple bg-purple-300"
                       : "border-slate-300 bg-white"
                   }`}
                 >
