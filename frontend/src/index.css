@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #cbc8ff 0%, #eef0ff 45%, #cde3ff 100%);
+  min-height: 100vh;
+}
+
+.card {
+  @apply bg-white rounded-3xl shadow-soft;
+}
