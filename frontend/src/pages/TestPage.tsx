@@ -73,10 +73,7 @@ export function TestPage() {
         testAnswers: answers,
         socioeconomicAnswers,
       });
-      setResults({
-        dominantInterests: result.dominantInterests,
-        careers: result.careers,
-      });
+      setResults(result);
       navigate('/resultados');
     } catch {
       setError('No se pudieron calcular los resultados. Intenta de nuevo.');

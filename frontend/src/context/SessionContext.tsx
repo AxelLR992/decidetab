@@ -1,15 +1,15 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import { DominantInterest, Profile, CareerResult } from '../types';
+import { Profile, ResultsResponse } from '../types';
 
 interface SessionState {
   profile: Profile | null;
   socioeconomicAnswers: Record<string, string>;
   testAnswers: Record<string, number>;
-  results: { dominantInterests: DominantInterest[]; careers: CareerResult[] } | null;
+  results: ResultsResponse | null;
   setProfile: (profile: Profile) => void;
   setSocioeconomicAnswers: (answers: Record<string, string>) => void;
   setTestAnswers: (answers: Record<string, number>) => void;
-  setResults: (results: { dominantInterests: DominantInterest[]; careers: CareerResult[] } | null) => void;
+  setResults: (results: ResultsResponse | null) => void;
   resetSession: () => void;
 }
 
@@ -19,7 +19,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [socioeconomicAnswers, setSocioeconomicAnswers] = useState<Record<string, string>>({});
   const [testAnswers, setTestAnswers] = useState<Record<string, number>>({});
-  const [results, setResults] = useState<{ dominantInterests: DominantInterest[]; careers: CareerResult[] } | null>(null);
+  const [results, setResults] = useState<ResultsResponse | null>(null);
 
   const value = useMemo(
     () => ({

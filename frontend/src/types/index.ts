@@ -45,7 +45,15 @@ export interface CareerResult {
   is_public: boolean;
 }
 
+export interface AreaInterest {
+  area: string;
+  areaName: string;
+  rawScore: number;
+  percentile: number;
+}
+
 export interface ResultsResponse {
   dominantInterests: DominantInterest[];
+  allAreaResults: AreaInterest[];
   careers: CareerResult[];
 }
