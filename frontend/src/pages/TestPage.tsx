@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppShell } from "../components/AppShell";
-import { ProgressBar } from "../components/ProgressBar";
-import { useSession } from "../context/SessionContext";
-import { calculateResults, getTestItems } from "../services/api";
-import { HerefordItem } from "../types";
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppShell } from '../components/AppShell';
+import { ProgressBar } from '../components/ProgressBar';
+import { useSession } from '../context/SessionContext';
+import { calculateResults, getTestItems } from '../services/api';
+import { HerefordItem } from '../types';
 
 const SCALE = [1, 2, 3, 4, 5];
 const PAGE_SIZE = 10;
@@ -21,18 +21,18 @@ export function TestPage() {
   const [items, setItems] = useState<HerefordItem[]>([]);
   const [answers, setAnswers] = useState<Record<string, number>>(testAnswers);
   const [page, setPage] = useState(0);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!profile) navigate("/");
-    if (!Object.keys(socioeconomicAnswers).length) navigate("/socioeconomico");
+    if (!profile) navigate('/');
+    if (!Object.keys(socioeconomicAnswers).length) navigate('/socioeconomico');
   }, [profile, socioeconomicAnswers, navigate]);
 
   useEffect(() => {
     getTestItems()
       .then(setItems)
-      .catch(() => setError("No se pudo cargar el test Hereford."));
+      .catch(() => setError('No se pudo cargar el test Hereford.'));
   }, []);
 
   const totalPages = Math.ceil(items.length / PAGE_SIZE);
@@ -52,11 +52,11 @@ export function TestPage() {
 
   const nextPage = async () => {
     if (!validateCurrentPage()) {
-      setError("Responde todos los ítems de la página actual.");
+      setError('Responde todos los ítems de la página actual.');
       return;
     }
 
-    setError("");
+    setError('');
     setTestAnswers(answers);
 
     if (page < totalPages - 1) {
@@ -77,9 +77,9 @@ export function TestPage() {
         dominantInterests: result.dominantInterests,
         careers: result.careers,
       });
-      navigate("/resultados");
+      navigate('/resultados');
     } catch {
-      setError("No se pudieron calcular los resultados. Intenta de nuevo.");
+      setError('No se pudieron calcular los resultados. Intenta de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -95,6 +95,18 @@ export function TestPage() {
           </span>
         </div>
         <ProgressBar value={completion} />
+      </div>
+
+      <div className="card mb-4 border border-purple-100 bg-purple-50/70 p-4 text-sm text-slate-700">
+        <p className="mb-2 font-semibold text-slate-800">Instrucciones para responder</p>
+        <p className="mb-2">Marca cuánto te identificas con cada afirmación usando la escala del 1 al 5:</p>
+        <ul className="grid gap-1 md:grid-cols-2">
+          <li><strong>1:</strong> Me desagrada mucho</li>
+          <li><strong>2:</strong> Me desagrada</li>
+          <li><strong>3:</strong> Ni me agrada ni me desagrada</li>
+          <li><strong>4:</strong> Me agrada</li>
+          <li><strong>5:</strong> Me gusta mucho</li>
+        </ul>
       </div>
 
       <div className="space-y-3">
@@ -116,8 +128,8 @@ export function TestPage() {
                   }
                   className={`rounded-xl border px-2 py-2 text-sm ${
                     answers[String(item.item_number)] === value
-                      ? "border-brand.purple bg-purple-300"
-                      : "border-slate-300 bg-white"
+                      ? 'border-brand.purple bg-purple-300'
+                      : 'border-slate-300 bg-white'
                   }`}
                 >
                   {value}
@@ -139,7 +151,7 @@ export function TestPage() {
         </button>
 
         <div className="text-center text-sm text-slate-600">
-          1 = Me desagrada mucho · 5 = Me gusta mucho
+          Escala de respuesta: 1 (mínimo acuerdo) a 5 (máximo acuerdo)
         </div>
 
         <button
@@ -150,9 +162,9 @@ export function TestPage() {
         >
           {page === totalPages - 1
             ? loading
-              ? "Calculando..."
-              : "Ver resultados"
-            : "Siguiente"}
+              ? 'Calculando...'
+              : 'Ver resultados'
+            : 'Siguiente'}
         </button>
       </div>
 

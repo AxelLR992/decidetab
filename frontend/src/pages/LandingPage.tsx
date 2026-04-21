@@ -31,6 +31,14 @@ export function LandingPage() {
           <p className="text-sm md:text-base">
             DecideTab te ayuda a identificar tus intereses vocacionales y sugerir carreras acordes a tu perfil.
           </p>
+          <div className="mt-4 rounded-2xl bg-white/20 p-4 text-sm">
+            <p className="mb-2 font-semibold">¿Cómo funciona la prueba?</p>
+            <ol className="list-inside list-decimal space-y-1">
+              <li>Completa tu perfil inicial y responde el cuestionario socioeconómico.</li>
+              <li>Contesta el test Hereford calificando cada afirmación del 1 al 5.</li>
+              <li>Revisa tus intereses dominantes y las carreras sugeridas para ti.</li>
+            </ol>
+          </div>
           <p className="mt-4 rounded-2xl bg-white/20 p-3 text-sm font-medium">
             ⚠️ Los datos y resultados se perderán al cerrar la pestaña.
           </p>

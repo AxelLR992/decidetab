@@ -40,6 +40,15 @@ export function SocioeconomicPage() {
         Perfil: <strong>{profile?.name}</strong> · {profile?.institution}
       </div>
 
+      <div className="card mb-5 border border-blue-100 bg-blue-50/70 p-4 text-sm text-slate-700">
+        <p className="mb-2 font-semibold text-slate-800">Instrucciones para el cuestionario socioeconómico</p>
+        <ul className="list-inside list-disc space-y-1">
+          <li>Lee cada pregunta con calma y elige una sola opción por reactivo.</li>
+          <li>Responde con datos reales para que las recomendaciones sean más precisas.</li>
+          <li>En la pregunta de presupuesto mensual, selecciona el rango que mejor se ajuste a tu situación.</li>
+        </ul>
+      </div>
+
       {questions.map((question) => (
         <QuestionCard
           key={question.id}
