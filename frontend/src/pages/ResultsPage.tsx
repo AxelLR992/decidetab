@@ -32,6 +32,16 @@ export function ResultsPage() {
         ))}
       </section>
 
+      <section className="card mb-6 border border-slate-200 bg-slate-50/80 p-4 text-sm text-slate-700">
+        <p className="font-semibold text-slate-800">¿Cómo interpretar tus resultados?</p>
+        <p className="mt-2">
+          <strong>Percentiles (P):</strong> P70 significa que tu puntaje está en el percentil 70, es decir, superaste al 70% de los estudiantes evaluados en esta área.
+        </p>
+        <p className="mt-2">
+          <strong>⚠️ Advertencia de Costo:</strong> Las carreras marcadas con advertencia de costo superan el presupuesto mensual que indicaste en el cuestionario socioeconómico.
+        </p>
+      </section>
+
       <section>
         <h3 className="mb-4 text-xl font-bold text-slate-800">Carreras sugeridas</h3>
         <div className="grid gap-4 md:grid-cols-2">
@@ -42,7 +52,6 @@ export function ResultsPage() {
             >
               <div className="mb-1 flex items-center justify-between gap-3">
                 <h4 className="font-semibold text-slate-800">{career.career_name}</h4>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs">Área {career.area_hereford}</span>
               </div>
               <p className="text-sm text-slate-600">{career.university}</p>
               <p className="text-sm text-slate-600">Modalidad: {career.modality}</p>
