@@ -28,18 +28,8 @@ const AREA_META: Record<string, string> = {
 
 const AREA_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
-const BASE_COLORS = [
-  "#7C6CFF",
-  "#5FA8FF",
-  "#8B7CFF",
-  "#6D8DFF",
-  "#98A8FF",
-  "#7CB7FF",
-  "#A69CFF",
-  "#8CC2FF",
-  "#B6ACFF",
-];
-const TOP_COLORS = ["#FF8F3F", "#FF6B6B", "#FFB347"];
+const BASE_COLOR = "#CBD5E1";
+const TOP_COLOR = "#F97316";
 
 function normalizeKeywordForOcc(text: string) {
   return text
@@ -110,16 +100,11 @@ export function ResultsPage() {
     const scoresByArea = new Map(
       results.allAreaResults.map((item) => [item.area, item.rawScore]),
     );
-    const topAreaSet = new Set(
-      results.dominantInterests.map((item) => item.area),
-    );
+    const topArea = results.dominantInterests[0]?.area;
 
-    let topColorIndex = 0;
-    return AREA_ORDER.map((area, index) => {
-      const isTop = topAreaSet.has(area);
-      const color = isTop
-        ? (TOP_COLORS[topColorIndex++] ?? TOP_COLORS[TOP_COLORS.length - 1])
-        : BASE_COLORS[index];
+    return AREA_ORDER.map((area) => {
+      const isTop = area === topArea;
+      const color = isTop ? TOP_COLOR : BASE_COLOR;
 
       return {
         area,
@@ -132,6 +117,7 @@ export function ResultsPage() {
   }, [results]);
 
   if (!results) return null;
+  const dominantInterest = results.dominantInterests[0];
   const careersWithoutBudgetAlert = results.careers.filter(
     (career) => !career.exceedsBudget,
   );
@@ -144,30 +130,30 @@ export function ResultsPage() {
       <div className="card mb-5 bg-gradient-to-r from-brand.lavender to-brand.blue p-5">
         <h2 className="text-2xl font-bold">Resultados de {profile?.name}</h2>
         <p className="text-sm">
-          Top 3 intereses dominantes según percentil Hereford.
+          Interés dominante según percentil Hereford.
         </p>
       </div>
 
       <section className="mb-6 grid gap-4 md:grid-cols-3">
-        {results.dominantInterests.map((interest) => (
+        {dominantInterest && (
           <article
-            key={interest.area}
+            key={dominantInterest.area}
             className="card p-5 transition hover:-translate-y-0.5"
           >
             <p className="text-xs uppercase text-slate-500">
-              Área {interest.area}
+              Área {dominantInterest.area}
             </p>
             <h3 className="text-lg font-bold text-slate-800">
-              {interest.areaName}
+              {dominantInterest.areaName}
             </h3>
             <p className="mt-2 text-3xl font-black text-brand.orange">
-              P{interest.percentile}
+              P{dominantInterest.percentile}
             </p>
             <p className="text-sm text-slate-500">
-              Puntaje bruto: {interest.rawScore}
+              Puntaje bruto: {dominantInterest.rawScore}
             </p>
           </article>
-        ))}
+        )}
       </section>
 
       <section className="card mb-6 p-5">
@@ -177,14 +163,14 @@ export function ResultsPage() {
               Puntajes por área (A-I)
             </h3>
             <p className="text-sm text-slate-600">
-              Las barras resaltadas representan tus 3 áreas dominantes.
+              La barra resaltada representa tu área dominante.
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-600">
             <span className="inline-block h-3 w-3 rounded-full bg-brand.purple" />
             <span>Áreas generales</span>
             <span className="ml-3 inline-block h-3 w-3 rounded-full bg-brand.orange" />
-            <span>Top 3 dominantes</span>
+            <span>Área dominante</span>
           </div>
         </div>
 
@@ -245,7 +231,7 @@ export function ResultsPage() {
               className={`text-xs ${item.isTop ? "font-semibold text-slate-800" : "text-slate-500"}`}
             >
               <span className="mr-1">{item.area}:</span>
-              {item.areaName}
+              {item.areaName} {item.isTop && "🏆"}
             </p>
           ))}
         </div>

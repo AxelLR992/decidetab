@@ -511,4 +511,3 @@ INSERT INTO careers (area_hereford, career_name, university, monthly_cost_approx
 ('H', 'Diseño y Comunicación Gráfica', 'IEU', 4000, 'Presencial', NULL, FALSE),
 ('H', 'Ing. en Diseño de Comunicación Digital', 'UAG', 16000, 'Presencial', NULL, FALSE),
 ('H', 'Lic. en Estilismo y Belleza Profesional', 'Esparta', 1000, 'Sabatino', NULL, FALSE),
-('I', 'Ing. en Sistemas y Tecnologías de la Información', 'IEU', 4000, 'Presencial', NULL, FALSE);

@@ -110,7 +110,7 @@ export async function calculateResults(payload: CalculateResultsPayload) {
   const budgetCode = payload.socioeconomicAnswers['3'];
   const budgetLimit = getBudgetLimit(budgetCode);
   const careers = await getCareersForAreas(
-    dominantInterests.map((d) => d.area),
+    dominantInterests.slice(0, 1).map((d) => d.area),
     budgetLimit
   );
 
