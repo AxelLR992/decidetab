@@ -13,6 +13,7 @@ import {
 import { AppShell } from "../components/AppShell";
 import { useSession } from "../context/SessionContext";
 import { CareerResult } from "../types";
+import { AreaTip } from "../components/AreaTip";
 
 const AREA_META: Record<string, string> = {
   A: "Cálculo",
@@ -129,9 +130,7 @@ export function ResultsPage() {
     <AppShell>
       <div className="card mb-5 bg-gradient-to-r from-brand.lavender to-brand.blue p-5">
         <h2 className="text-2xl font-bold">Resultados de {profile?.name}</h2>
-        <p className="text-sm">
-          Interés dominante según percentil Hereford.
-        </p>
+        <p className="text-sm">Interés dominante según percentil Hereford.</p>
       </div>
 
       <section className="mb-6 grid gap-4 md:grid-cols-3">
@@ -251,6 +250,11 @@ export function ResultsPage() {
           advertencia de costo superan el presupuesto mensual que indicaste en
           el cuestionario socioeconómico.
         </p>
+      </section>
+
+      <section className="card mb-6 border border-slate-200 bg-slate-50/80 p-4 text-sm text-slate-700">
+        <h3 className="mb-4 font-bold text-slate-800">Contexto del área {dominantInterest.area}:</h3>
+        <AreaTip area={dominantInterest.area} />
       </section>
 
       <section>
