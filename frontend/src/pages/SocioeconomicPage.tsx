@@ -34,6 +34,15 @@ export function SocioeconomicPage() {
     navigate('/test');
   };
 
+  const onFillDevData = () => {
+    const filledAnswers = questions.reduce<Record<string, string>>((acc, question) => {
+      acc[String(question.question_number)] = question.options[0]?.value || '';
+      return acc;
+    }, {});
+    setAnswers(filledAnswers);
+    setError('');
+  };
+
   return (
     <AppShell>
       <div className="card mb-4 bg-brand.blue/10 p-4 text-slate-700">
@@ -78,7 +87,17 @@ export function SocioeconomicPage() {
 
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-3">
+        {import.meta.env.DEV && (
+          <button
+            type="button"
+            onClick={onFillDevData}
+            disabled={!questions.length}
+            className="rounded-2xl border border-brand.blue bg-brand.blue/10 px-6 py-3 font-semibold text-slate-700 disabled:opacity-50"
+          >
+            Rellenar prueba
+          </button>
+        )}
         <button onClick={onContinue} className="rounded-2xl bg-brand.purple px-6 py-3 font-semibold">
           Ir al test Hereford
         </button>

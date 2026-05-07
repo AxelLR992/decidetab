@@ -82,6 +82,16 @@ export function TestPage() {
     }
   };
 
+  const onFillDevData = () => {
+    const filledAnswers = items.reduce<Record<string, number>>((acc, item) => {
+      acc[String(item.item_number)] = 5;
+      return acc;
+    }, {});
+    setAnswers(filledAnswers);
+    setTestAnswers(filledAnswers);
+    setError('');
+  };
+
   return (
     <AppShell>
       <div className="card mb-4 p-4">
@@ -151,18 +161,31 @@ export function TestPage() {
           Escala de respuesta: 1 (mínimo acuerdo) a 5 (máximo acuerdo)
         </div>
 
-        <button
-          type="button"
-          onClick={nextPage}
-          disabled={loading}
-          className="rounded-2xl bg-brand.orange px-5 py-3 font-semibold disabled:opacity-60"
-        >
-          {page === totalPages - 1
-            ? loading
-              ? 'Calculando...'
-              : 'Ver resultados'
-            : 'Siguiente'}
-        </button>
+        <div className="flex items-center gap-2">
+          {import.meta.env.DEV && (
+            <button
+              type="button"
+              onClick={onFillDevData}
+              disabled={!items.length || loading}
+              className="rounded-2xl border border-brand.blue bg-brand.blue/10 px-5 py-3 font-semibold text-slate-700 disabled:opacity-50"
+            >
+              Rellenar prueba
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={nextPage}
+            disabled={loading}
+            className="rounded-2xl bg-brand.orange px-5 py-3 font-semibold disabled:opacity-60"
+          >
+            {page === totalPages - 1
+              ? loading
+                ? 'Calculando...'
+                : 'Ver resultados'
+              : 'Siguiente'}
+          </button>
+        </div>
       </div>
 
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}

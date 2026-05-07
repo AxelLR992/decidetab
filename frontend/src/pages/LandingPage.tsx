@@ -23,6 +23,13 @@ export function LandingPage() {
     navigate('/socioeconomico');
   };
 
+  const onFillDevData = () => {
+    setName('Estudiante Demo');
+    setInstitution('Preparatoria Demo Tabasco');
+    setSex('F');
+    setError('');
+  };
+
   return (
     <AppShell>
       <section className="grid gap-6 md:grid-cols-2">
@@ -72,7 +79,17 @@ export function LandingPage() {
 
           {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
-          <button className="mt-6 w-full rounded-2xl bg-brand.orange px-4 py-3 font-semibold hover:brightness-95">
+          {import.meta.env.DEV && (
+            <button
+              type="button"
+              onClick={onFillDevData}
+              className="mt-6 w-full rounded-2xl border border-brand.blue bg-brand.blue/10 px-4 py-3 font-semibold text-slate-700 hover:bg-brand.blue/20"
+            >
+              Rellenar datos de prueba
+            </button>
+          )}
+
+          <button className="mt-3 w-full rounded-2xl bg-brand.orange px-4 py-3 font-semibold hover:brightness-95">
             Continuar
           </button>
         </form>

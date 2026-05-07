@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm *)",
+      "Bash(/wait *)",
+      "Bash(npm *)",
+      "Bash(/wait *)",
+      "Bash(/exit *)",
+      "Bash(npm *)"
+    ]
+  }
+}
