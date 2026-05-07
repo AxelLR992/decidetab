@@ -6,6 +6,8 @@
       "Bash(npm *)",
       "Bash(/wait *)",
       "Bash(/exit *)",
+      "Bash(npm *)",
+      "Bash(npm *)",
       "Bash(npm *)"
     ]
   }

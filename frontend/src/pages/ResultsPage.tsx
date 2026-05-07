@@ -272,7 +272,7 @@ export function ResultsPage() {
           Carreras sugeridas
         </h3>
         <div className="grid gap-4 md:grid-cols-2">
-          {careersWithoutBudgetAlert.slice(0, 3).map((career) => (
+          {careersWithoutBudgetAlert.map((career) => (
             <article
               key={career.id}
               className={`card border p-4 transition hover:-translate-y-0.5 hover:shadow-soft ${
@@ -285,6 +285,9 @@ export function ResultsPage() {
                 <h4 className="font-semibold text-slate-800">
                   {career.career_name}
                 </h4>
+                <span className="rounded-full bg-brand.purple/15 px-2 py-1 text-xs font-semibold text-brand.purple">
+                  Área {career.area_hereford} · {career.area_name}
+                </span>
               </div>
               <p className="text-sm text-slate-600">{career.university}</p>
               <p className="text-sm text-slate-600">
@@ -306,7 +309,7 @@ export function ResultsPage() {
               )}
             </article>
           ))}
-          {careersWithBudgetAlert.slice(0, 3).map((career) => (
+          {careersWithBudgetAlert.map((career) => (
             <article
               key={career.id}
               className={`card border p-4 transition hover:-translate-y-0.5 hover:shadow-soft ${
@@ -319,6 +322,9 @@ export function ResultsPage() {
                 <h4 className="font-semibold text-slate-800">
                   {career.career_name}
                 </h4>
+                <span className="rounded-full bg-brand.purple/15 px-2 py-1 text-xs font-semibold text-brand.purple">
+                  Área {career.area_hereford} · {career.area_name}
+                </span>
               </div>
               <p className="text-sm text-slate-600">{career.university}</p>
               <p className="text-sm text-slate-600">
