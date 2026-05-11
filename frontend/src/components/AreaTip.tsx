@@ -35,11 +35,11 @@ export const AreaTip: FC<Props> = ({ area }) => {
         <div>
           <strong>Area CIENTÍFICO FÍSICO:</strong> Ingenierías, Petróleo y
           Química. <br />
-          <strong>Intereses para el trabajo al Aire Libre:</strong> Se refiere a
-          trabajos que tengan que ver con la naturaleza, su desarrollo y
-          preservación. Quienes se dedican a este campo realizan trabajos
-          técnicos y científicos de campo para mejorar y proteger las
-          condiciones de todas las formas de vida sobre nuestro planeta. <br />
+          <strong>Intereses Científicos:</strong> Alto interés hacia la
+          investigación y trabajos de laboratorio, así como actividad en el
+          estudio de fenómenos atmosféricos, astronómicos y geográficos. Se
+          enfoca en los aspectos teóricos de la física y las matemáticas, así
+          como en los procesos de sistematización de datos. <br />
           <strong>Contexto en Tabasco:</strong> El corazón económico del estado.
           El sector de minería petrolera representa más del 60% del PIB estatal.{" "}
           <br />
@@ -56,11 +56,11 @@ export const AreaTip: FC<Props> = ({ area }) => {
         <div>
           <strong>Area CIENTÍFICO BIOLÓGICO:</strong> Medicina, Enfermería y
           Agronomía. <br />
-          <strong>Intereses Científicos:</strong> Alto interés hacia la
-          investigación y trabajos de laboratorio, así como actividad en el
-          estudio de fenómenos atmosféricos, astronómicos y geográficos. Se
-          enfoca en los aspectos teóricos de la física y las matemáticas, así
-          como en los procesos de sistematización de datos. <br />
+          <strong>Intereses para el trabajo al Aire Libre:</strong> Se refiere a
+          trabajos que tengan que ver con la naturaleza, su desarrollo y
+          preservación. Quienes se dedican a este campo realizan trabajos
+          técnicos y científicos de campo para mejorar y proteger las
+          condiciones de todas las formas de vida sobre nuestro planeta. <br />
           <strong>Contexto en Tabasco:</strong> Sector vital pero con retos de
           saturación en el sistema público. La agroindustria está retomando
           fuerza en la zona de la Chontalpa. <br />
