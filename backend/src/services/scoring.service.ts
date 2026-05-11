@@ -19,8 +19,35 @@ const BUDGET_LIMITS: Record<string, number | null> = {
   C: null
 };
 
+function parseBudgetRangeCode(rawValue?: string): 'A' | 'B' | 'C' | null {
+  if (!rawValue) return null;
+
+  const normalized = rawValue
+    .trim()
+    .toUpperCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  if (normalized in BUDGET_LIMITS) {
+    return normalized as 'A' | 'B' | 'C';
+  }
+
+  const explicitRangeMatch = normalized.match(/RANGO\s*([ABC])\b/);
+  if (explicitRangeMatch) {
+    return explicitRangeMatch[1] as 'A' | 'B' | 'C';
+  }
+
+  if (/MENOS\s+DE\s*\$?\s*1[,.]?500/.test(normalized)) return 'A';
+  if (/1[,.]?500\s*[–-]\s*\$?\s*4[,.]?000/.test(normalized)) return 'B';
+  if (/MAS\s+DE\s*\$?\s*4[,.]?000/.test(normalized)) return 'C';
+
+  return null;
+}
+
 function getBudgetLimit(rangeCode?: string): number | null {
-  return BUDGET_LIMITS[rangeCode || ''] ?? 1500;
+  const parsedRangeCode = parseBudgetRangeCode(rangeCode);
+  if (!parsedRangeCode) return 1500;
+  return BUDGET_LIMITS[parsedRangeCode];
 }
 
 async function getAreaRawScores(testAnswers: Record<string, number>): Promise<Record<string, number>> {
